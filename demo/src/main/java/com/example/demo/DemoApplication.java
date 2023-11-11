@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.r2dbc.R2dbcAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 
-@ComponentScan("com.example.demo.DAO")
+@ComponentScan({"com.example.demo.DAO", "com.example.demo.Service", "com.example.demo.Controller"})
 @SpringBootApplication(exclude = {R2dbcAutoConfiguration.class})
 public class DemoApplication {
 
