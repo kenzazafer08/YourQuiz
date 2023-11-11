@@ -13,10 +13,12 @@ import org.hibernate.annotations.Where;
 @Data
 @Getter
 @Setter
+@Where(clause = "deleted = false")
 public class Level {
     @Id
     private String code;
     private String description;
     private int minScore;
     private int maxScore;
+    protected Boolean deleted;
 }
