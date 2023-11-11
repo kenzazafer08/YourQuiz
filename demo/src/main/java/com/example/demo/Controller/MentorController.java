@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -43,6 +44,12 @@ public class MentorController {
         }else{
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<List<Mentor>> getAllMentors() {
+        List<Mentor> mentors = mentorService.getAllMentors();
+        return ResponseEntity.ok(mentors);
     }
 }
 
