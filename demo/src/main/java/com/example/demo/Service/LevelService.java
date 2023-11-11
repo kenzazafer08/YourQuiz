@@ -6,6 +6,7 @@ import com.example.demo.Entity.Mentor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -31,5 +32,9 @@ public class LevelService {
         } else {
             return false;
         }
+    }
+
+    public List<Level> getAllLevels() {
+        return levelDAO.findAll();
     }
 }
