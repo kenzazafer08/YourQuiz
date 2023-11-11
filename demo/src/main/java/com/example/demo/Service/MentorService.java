@@ -40,4 +40,20 @@ public class MentorService {
     public List<Mentor> getAllMentors() {
         return mentorDAO.findAll();
     }
+
+    public Optional<Mentor> updateMentor(String mentorCode, Mentor updatedMentor) {
+        Mentor existingMentor = mentorDAO.findById(mentorCode).orElse(null);
+
+        if (existingMentor != null) {
+            existingMentor.setFirstName(updatedMentor.getFirstName());
+            existingMentor.setLastName(updatedMentor.getLastName());
+            existingMentor.setPhone(updatedMentor.getPhone());
+            existingMentor.setAddress(updatedMentor.getAddress());
+            existingMentor.setSpeciality(updatedMentor.getSpeciality());
+
+            return Optional.of(mentorDAO.save(existingMentor));
+        }
+
+        return Optional.empty();
+    }
 }

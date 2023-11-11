@@ -51,5 +51,20 @@ public class MentorController {
         List<Mentor> mentors = mentorService.getAllMentors();
         return ResponseEntity.ok(mentors);
     }
+
+
+    @PutMapping("/update/{mentorCode}")
+    public ResponseEntity<Optional<Mentor>> updateMentor(
+            @PathVariable String mentorCode,
+            @RequestBody Mentor updatedMentor
+    ) {
+        Optional<Mentor> updated = mentorService.updateMentor(mentorCode, updatedMentor);
+
+        if (updated.isPresent()) {
+            return ResponseEntity.ok(updated);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
 
