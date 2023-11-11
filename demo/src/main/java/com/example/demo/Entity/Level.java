@@ -13,7 +13,6 @@ import org.hibernate.annotations.Where;
 @Data
 @Getter
 @Setter
-@Where(clause = "deleted = false")
 public class Level {
     @Id
     private String code;
