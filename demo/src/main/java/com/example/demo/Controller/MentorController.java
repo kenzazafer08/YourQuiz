@@ -34,5 +34,15 @@ public class MentorController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @PutMapping("/delete/{mentorCode}")
+    public ResponseEntity<String> softDeleteMentor(@PathVariable String mentorCode) {
+        boolean deleted = mentorService.softDeleteMentor(mentorCode);
+        if(deleted){
+            return ResponseEntity.ok("Mentor with code " + mentorCode + " is soft deleted");
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
 

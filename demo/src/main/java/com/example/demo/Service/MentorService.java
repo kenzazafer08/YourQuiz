@@ -25,5 +25,14 @@ public class MentorService {
         return Optional.ofNullable(optionalMentor.orElse(null));
     }
 
-
+    public boolean softDeleteMentor(String mentorCode) {
+        Mentor mentor = mentorDAO.findById(mentorCode).orElse(null);
+        if (mentor != null) {
+            mentor.setDeleted(true);
+            mentorDAO.save(mentor);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
