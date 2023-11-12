@@ -27,12 +27,15 @@ public class Question {
 
     @ManyToOne
     @JoinColumn(name = "subject_id")
+    @JsonBackReference
     private Subject subject;
 
     @ManyToOne
     @JoinColumn(name = "level_id")
+    @JsonBackReference
     private Level level;
 
     @OneToMany(mappedBy = "question")
+    @JsonManagedReference
     private List<QuestionAnswers> questionAnswers;
 }

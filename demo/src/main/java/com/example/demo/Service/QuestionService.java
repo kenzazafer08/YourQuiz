@@ -58,4 +58,9 @@ public class QuestionService {
         return newAnswers;
     }
 
+    public Optional<Question> findByCode(String answerCode){
+        Optional<Question> optionalQuestion = questionRepository.findById(answerCode);
+        return Optional.ofNullable(optionalQuestion.orElse(null));
+    }
+
 }

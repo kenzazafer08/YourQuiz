@@ -1,11 +1,10 @@
 package com.example.demo.Controller;
 
-import com.example.demo.Entity.Answers;
 import com.example.demo.Entity.Question;
 import com.example.demo.Entity.QuestionAnswers;
+import com.example.demo.Entity.Subject;
 import com.example.demo.Service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,6 +33,16 @@ public class QuestionController {
             @RequestBody List<QuestionAnswers> answer
     ) {
         return questionService.addAnswersToQuestion(questionCode, answer);
+    }
+
+    @GetMapping("/{questionCode}")
+    public ResponseEntity<Question> getSubjectByCode(@PathVariable String questionCode) {
+        Optional<Question> question = questionService.findByCode(questionCode);
+        if (question.isPresent()) {
+            return ResponseEntity.ok(question.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
 }
