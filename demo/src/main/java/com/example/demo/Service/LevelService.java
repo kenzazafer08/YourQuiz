@@ -37,4 +37,18 @@ public class LevelService {
     public List<Level> getAllLevels() {
         return levelDAO.findAll();
     }
+
+    public Optional<Level> updateLevel(String levelCode, Level updatedLevel) {
+        Level existingLevel = levelDAO.findById(levelCode).orElse(null);
+
+        if (existingLevel != null) {
+            existingLevel.setDescription(updatedLevel.getDescription());
+            existingLevel.setMaxScore(updatedLevel.getMaxScore());
+            existingLevel.setMinScore(updatedLevel.getMinScore());
+
+            return Optional.of(levelDAO.save(existingLevel));
+        }
+
+        return Optional.empty();
+    }
 }

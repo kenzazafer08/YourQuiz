@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/levels")
@@ -40,5 +41,19 @@ public class LevelController {
     public ResponseEntity<List<Level>> getAllLevels() {
         List<Level> Levels = levelService.getAllLevels();
         return ResponseEntity.ok(Levels);
+    }
+
+    @PutMapping("/update/{levelCode}")
+    public ResponseEntity<Optional<Level>> updateMentor(
+            @PathVariable String levelCode,
+            @RequestBody Level updatedLevel
+    ) {
+        Optional<Level> updated = levelService.updateLevel(levelCode, updatedLevel);
+
+        if (updated.isPresent()) {
+            return ResponseEntity.ok(updated);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
