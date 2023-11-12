@@ -20,4 +20,9 @@ public class AnswerService {
     public Optional<Answers> addAnswer(Answers answer){
         return Optional.of(answerDAO.save(answer));
     }
+
+    public Optional<Answers> findByCode(String answerCode){
+        Optional<Answers> optionalAnswers = answerDAO.findById(answerCode);
+        return Optional.ofNullable(optionalAnswers.orElse(null));
+    }
 }
