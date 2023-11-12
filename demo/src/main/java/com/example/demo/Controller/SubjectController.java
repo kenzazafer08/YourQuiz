@@ -1,5 +1,6 @@
 package com.example.demo.Controller;
 
+import com.example.demo.Entity.Level;
 import com.example.demo.Entity.Mentor;
 import com.example.demo.Entity.Subject;
 import com.example.demo.Service.SubjectService;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -43,6 +45,12 @@ public class SubjectController {
         }else{
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<List<Subject>> getAllLevels() {
+        List<Subject> Subjects = subjectService.getAllSubjects();
+        return ResponseEntity.ok(Subjects);
     }
 
 }

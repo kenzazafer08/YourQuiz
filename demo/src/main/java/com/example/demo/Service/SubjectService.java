@@ -7,6 +7,7 @@ import com.example.demo.Entity.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -38,4 +39,9 @@ public class SubjectService {
             return false;
         }
     }
+
+    public List<Subject> getAllSubjects() {
+        return subjectDAO.findAll();
+    }
+
 }
