@@ -1,5 +1,7 @@
 package com.example.demo.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
@@ -18,7 +20,5 @@ public class Answers {
     @Id
     private String code;
     private String text;
-
-    @OneToMany(mappedBy = "answer")
-    private List<QuestionAnswers> questionAnswers;
+    private boolean deleted;
 }

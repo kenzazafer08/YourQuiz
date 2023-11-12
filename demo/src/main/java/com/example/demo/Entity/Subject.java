@@ -22,6 +22,7 @@ public class Subject {
     private String title;
     private boolean deleted;
     @ManyToOne
+    @JsonBackReference
     private Subject superSubject;
 
     @OneToMany(mappedBy = "superSubject")
