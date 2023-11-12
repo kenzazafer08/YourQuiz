@@ -1,5 +1,7 @@
 package com.example.demo.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
@@ -19,8 +21,11 @@ public class Subject {
     private String code;
     private String title;
     @ManyToOne
+    @JoinColumn(name = "super_subject_code")
+    @JsonBackReference
     private Subject superSubject;
 
     @OneToMany(mappedBy = "superSubject")
+    @JsonManagedReference
     private List<Subject> subSubjects;
 }
