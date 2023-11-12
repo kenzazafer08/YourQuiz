@@ -1,7 +1,6 @@
 package com.example.demo.Service;
 
 import com.example.demo.DAO.SubjectDAO;
-import com.example.demo.Entity.Level;
 import com.example.demo.Entity.Mentor;
 import com.example.demo.Entity.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +41,19 @@ public class SubjectService {
 
     public List<Subject> getAllSubjects() {
         return subjectDAO.findAll();
+    }
+
+    public Optional<Subject> updateMentor(String subjectCode, Subject updatedSubject) {
+        Subject existingSubject = subjectDAO.findById(subjectCode).orElse(null);
+
+        if (existingSubject != null) {
+            existingSubject.setTitle(updatedSubject.getTitle());
+            existingSubject.setSuperSubject(updatedSubject.getSuperSubject());
+
+            return Optional.of(subjectDAO.save(existingSubject));
+        }
+
+        return Optional.empty();
     }
 
 }

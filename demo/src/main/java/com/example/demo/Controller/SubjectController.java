@@ -1,7 +1,5 @@
 package com.example.demo.Controller;
 
-import com.example.demo.Entity.Level;
-import com.example.demo.Entity.Mentor;
 import com.example.demo.Entity.Subject;
 import com.example.demo.Service.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +49,20 @@ public class SubjectController {
     public ResponseEntity<List<Subject>> getAllLevels() {
         List<Subject> Subjects = subjectService.getAllSubjects();
         return ResponseEntity.ok(Subjects);
+    }
+
+    @PutMapping("/update/{subjectCode}")
+    public ResponseEntity<Optional<Subject>> updateSubject(
+            @PathVariable String subjectCode,
+            @RequestBody Subject updateSubject
+    ) {
+        Optional<Subject> updated = subjectService.updateMentor(subjectCode, updateSubject);
+
+        if (updated.isPresent()) {
+            return ResponseEntity.ok(updated);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
 }

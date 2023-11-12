@@ -22,8 +22,6 @@ public class Subject {
     private String title;
     private boolean deleted;
     @ManyToOne
-    @JoinColumn(name = "super_subject_code")
-    @JsonBackReference
     private Subject superSubject;
 
     @OneToMany(mappedBy = "superSubject")
