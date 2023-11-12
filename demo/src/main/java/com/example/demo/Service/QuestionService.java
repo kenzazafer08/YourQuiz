@@ -1,11 +1,9 @@
 package com.example.demo.Service;
 
 import com.example.demo.DAO.QuestionAnswersDAO;
-import com.example.demo.Entity.Answers;
 import com.example.demo.Entity.Question;
 import com.example.demo.Entity.QuestionAnswers;
 import com.example.demo.DAO.QuestionDAO;
-import com.example.demo.Entity.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -74,5 +72,10 @@ public class QuestionService {
             return false;
         }
     }
+
+    public List<Question> getAllQuestions() {
+        return questionRepository.findAll();
+    }
+
 
 }

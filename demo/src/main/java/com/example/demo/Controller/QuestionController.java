@@ -55,4 +55,10 @@ public class QuestionController {
         }
     }
 
+    @GetMapping("/list")
+    public ResponseEntity<List<Question>> getAllQuestions() {
+        List<Question> questions = questionService.getAllQuestions();
+        return ResponseEntity.ok(questions);
+    }
+
 }
