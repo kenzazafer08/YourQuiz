@@ -1,11 +1,13 @@
 package com.example.demo.Controller;
 
 import com.example.demo.Entity.Answers;
+import com.example.demo.Entity.Level;
 import com.example.demo.Service.AnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -42,5 +44,11 @@ public class AnswerController {
         }else{
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<List<Answers>> getAllAnswers() {
+        List<Answers> answers = answerService.getAllAnswers();
+        return ResponseEntity.ok(answers);
     }
 }

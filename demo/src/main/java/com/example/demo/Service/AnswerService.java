@@ -5,6 +5,7 @@ import com.example.demo.Entity.Answers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -36,4 +37,9 @@ public class AnswerService {
             return false;
         }
     }
+
+    public List<Answers> getAllAnswers() {
+        return answerDAO.findAll();
+    }
+
 }
