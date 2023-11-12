@@ -1,5 +1,7 @@
 package com.example.demo.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
@@ -21,6 +23,7 @@ public class Question {
     private int rightAnswers;
     private String text;
     private int MaxScore;
+    private boolean deleted;
 
     @ManyToOne
     @JoinColumn(name = "subject_id")
