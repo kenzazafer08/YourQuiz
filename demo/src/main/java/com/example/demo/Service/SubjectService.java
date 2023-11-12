@@ -27,4 +27,15 @@ public class SubjectService {
         Optional<Subject> optionalSubject = subjectDAO.findById(SubjectCode);
         return Optional.ofNullable(optionalSubject.orElse(null));
     }
+
+    public boolean softDeleteSubject(String subjectCode) {
+        Subject subject = subjectDAO.findById(subjectCode).orElse(null);
+        if (subject != null) {
+            subject.setDeleted(true);
+            subjectDAO.save(subject);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

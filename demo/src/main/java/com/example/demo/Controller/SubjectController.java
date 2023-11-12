@@ -34,4 +34,15 @@ public class SubjectController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @PutMapping("/delete/{subjectCode}")
+    public ResponseEntity<String> softDeleteSubject(@PathVariable String subjectCode) {
+        boolean deleted = subjectService.softDeleteSubject(subjectCode);
+        if(deleted){
+            return ResponseEntity.ok("Subject with code " + subjectCode + " is soft deleted");
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }

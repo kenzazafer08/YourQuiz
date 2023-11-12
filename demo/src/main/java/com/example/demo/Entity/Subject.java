@@ -20,6 +20,7 @@ public class Subject {
     @Id
     private String code;
     private String title;
+    private boolean deleted;
     @ManyToOne
     @JoinColumn(name = "super_subject_code")
     @JsonBackReference
