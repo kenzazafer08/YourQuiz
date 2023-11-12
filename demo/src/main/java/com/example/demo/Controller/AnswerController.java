@@ -1,7 +1,6 @@
 package com.example.demo.Controller;
 
 import com.example.demo.Entity.Answers;
-import com.example.demo.Entity.Mentor;
 import com.example.demo.Service.AnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -33,5 +32,15 @@ public class AnswerController {
             return ResponseEntity.ok(answer.get());
         }
         else return ResponseEntity.notFound().build();
+    }
+
+    @PutMapping("/delete/{answerCode}")
+    public ResponseEntity<String> softDeleteAnswer(@PathVariable String answerCode) {
+        boolean deleted = answerService.softDeleteAnswer(answerCode);
+        if(deleted){
+            return ResponseEntity.ok("Answer with code " + answerCode + " is soft deleted");
+        }else{
+            return ResponseEntity.notFound().build();
+        }
     }
 }

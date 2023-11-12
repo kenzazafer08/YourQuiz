@@ -25,4 +25,15 @@ public class AnswerService {
         Optional<Answers> optionalAnswers = answerDAO.findById(answerCode);
         return Optional.ofNullable(optionalAnswers.orElse(null));
     }
+
+    public boolean softDeleteAnswer(String answerCode) {
+        Answers answer = answerDAO.findById(answerCode).orElse(null);
+        if (answer != null) {
+            answer.setDeleted(true);
+            answerDAO.save(answer);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
