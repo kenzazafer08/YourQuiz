@@ -5,6 +5,7 @@ import com.example.demo.Entity.Answers;
 import com.example.demo.Entity.Question;
 import com.example.demo.Entity.QuestionAnswers;
 import com.example.demo.DAO.QuestionDAO;
+import com.example.demo.Entity.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -61,6 +62,17 @@ public class QuestionService {
     public Optional<Question> findByCode(String answerCode){
         Optional<Question> optionalQuestion = questionRepository.findById(answerCode);
         return Optional.ofNullable(optionalQuestion.orElse(null));
+    }
+
+    public boolean softDeleteQuestion(String subjectCode) {
+        Question question = questionRepository.findById(subjectCode).orElse(null);
+        if (question != null) {
+            question.setDeleted(true);
+            questionRepository.save(question);
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

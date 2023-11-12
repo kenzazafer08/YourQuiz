@@ -45,4 +45,14 @@ public class QuestionController {
         }
     }
 
+    @PutMapping("/delete/{questionCode}")
+    public ResponseEntity<String> softDeleteSubject(@PathVariable String questionCode) {
+        boolean deleted = questionService.softDeleteQuestion(questionCode);
+        if(deleted){
+            return ResponseEntity.ok("Question with code " + questionCode + " is soft deleted");
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }
