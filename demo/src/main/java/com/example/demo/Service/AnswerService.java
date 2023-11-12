@@ -42,4 +42,16 @@ public class AnswerService {
         return answerDAO.findAll();
     }
 
+    public Optional<Answers> updateAnswer(String answerCode, Answers updatedAnswer) {
+        Answers existingAnswer = answerDAO.findById(answerCode).orElse(null);
+
+        if (existingAnswer != null) {
+            existingAnswer.setText(updatedAnswer.getText());
+
+            return Optional.of(answerDAO.save(existingAnswer));
+        }
+
+        return Optional.empty();
+    }
+
 }

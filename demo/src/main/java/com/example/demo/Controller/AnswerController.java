@@ -1,7 +1,6 @@
 package com.example.demo.Controller;
 
 import com.example.demo.Entity.Answers;
-import com.example.demo.Entity.Level;
 import com.example.demo.Service.AnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -50,5 +49,19 @@ public class AnswerController {
     public ResponseEntity<List<Answers>> getAllAnswers() {
         List<Answers> answers = answerService.getAllAnswers();
         return ResponseEntity.ok(answers);
+    }
+
+    @PutMapping("/update/{answerCode}")
+    public ResponseEntity<Optional<Answers>> updateMentor(
+            @PathVariable String answerCode,
+            @RequestBody Answers updatedAnswer
+    ) {
+        Optional<Answers> updated = answerService.updateAnswer(answerCode, updatedAnswer);
+
+        if (updated.isPresent()) {
+            return ResponseEntity.ok(updated);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
