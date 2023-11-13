@@ -19,7 +19,13 @@ public class AnswerService {
     }
 
     public Optional<Answers> addAnswer(Answers answer){
-        return Optional.of(answerDAO.save(answer));
+        Optional<Answers> existingAnswer = answerDAO.findByText(answer.getText());
+
+        if (existingAnswer.isPresent()) {
+            return Optional.empty();
+        } else {
+            return Optional.of(answerDAO.save(answer));
+        }
     }
 
     public Optional<Answers> findByCode(String answerCode){
