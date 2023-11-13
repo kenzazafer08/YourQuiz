@@ -4,6 +4,7 @@ import com.example.demo.Entity.Question;
 import com.example.demo.Entity.QuestionAnswers;
 import com.example.demo.Service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -71,6 +72,20 @@ public class QuestionController {
             return ResponseEntity.ok(updated);
         } else {
             return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping("/{questionCode}/answers/{answerId}")
+    public ResponseEntity<String> deleteAnswerFromQuestion(
+            @PathVariable String questionCode,
+            @PathVariable String answerId
+    ) {
+        Boolean deleted = questionService.deleteAnswerFromQuestion(questionCode, answerId);
+
+        if (deleted) {
+            return new ResponseEntity<>("Answer deleted", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Answer not found or could not be deleted", HttpStatus.NOT_FOUND);
         }
     }
 

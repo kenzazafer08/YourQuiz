@@ -8,4 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface QuestionAnswersDAO extends JpaRepository<QuestionAnswers, String> {
+    Optional<QuestionAnswers> findByQuestion_CodeAndAnswer_Code(String questionCode, String answerCode);
 }

@@ -4,7 +4,6 @@ import com.example.demo.DAO.QuestionAnswersDAO;
 import com.example.demo.Entity.Question;
 import com.example.demo.Entity.QuestionAnswers;
 import com.example.demo.DAO.QuestionDAO;
-import com.example.demo.Entity.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -91,6 +90,15 @@ public class QuestionService {
         }
 
         return Optional.empty();
+    }
+
+    @Transactional
+    public Boolean deleteAnswerFromQuestion(String questionCode, String answerId) {
+        Optional<QuestionAnswers> answerToDelete = questionAnswersDAO.findByQuestion_CodeAndAnswer_Code(questionCode,answerId);
+        if(answerToDelete.isPresent()){
+            questionAnswersDAO.delete(answerToDelete.get());
+            return true;
+        }return false;
     }
 
 }
