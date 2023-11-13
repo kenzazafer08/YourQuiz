@@ -4,6 +4,7 @@ import com.example.demo.DAO.QuestionAnswersDAO;
 import com.example.demo.Entity.Question;
 import com.example.demo.Entity.QuestionAnswers;
 import com.example.demo.DAO.QuestionDAO;
+import com.example.demo.Entity.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -77,5 +78,19 @@ public class QuestionService {
         return questionRepository.findAll();
     }
 
+    public Optional<Question> updateQuestion(String questionCode, Question updatedQuestion) {
+        Question existingQuestion = questionRepository.findById(questionCode).orElse(null);
+
+        if (existingQuestion != null) {
+            existingQuestion.setLevel(updatedQuestion.getLevel());
+            existingQuestion.setText(updatedQuestion.getText());
+            existingQuestion.setMaxScore(updatedQuestion.getMaxScore());
+            existingQuestion.setNbrAnswers(updatedQuestion.getNbrAnswers());
+            existingQuestion.setSubject(existingQuestion.getSubject());
+            return Optional.of(questionRepository.save(existingQuestion));
+        }
+
+        return Optional.empty();
+    }
 
 }

@@ -2,7 +2,6 @@ package com.example.demo.Controller;
 
 import com.example.demo.Entity.Question;
 import com.example.demo.Entity.QuestionAnswers;
-import com.example.demo.Entity.Subject;
 import com.example.demo.Service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -59,6 +58,20 @@ public class QuestionController {
     public ResponseEntity<List<Question>> getAllQuestions() {
         List<Question> questions = questionService.getAllQuestions();
         return ResponseEntity.ok(questions);
+    }
+
+    @PutMapping("/update/{questionCode}")
+    public ResponseEntity<Optional<Question>> updateQuestion(
+            @PathVariable String questionCode,
+            @RequestBody Question updateQuestion
+    ) {
+        Optional<Question> updated = questionService.updateQuestion(questionCode, updateQuestion);
+
+        if (updated.isPresent()) {
+            return ResponseEntity.ok(updated);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
 }
