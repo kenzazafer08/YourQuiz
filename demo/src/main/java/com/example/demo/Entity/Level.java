@@ -1,5 +1,6 @@
 package com.example.demo.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
@@ -22,6 +23,7 @@ public class Level {
     private int maxScore;
     private Boolean deleted;
     @OneToMany(mappedBy = "level", fetch = FetchType.EAGER)
+    @JsonBackReference
     private List<Question> questions;
 
 }
