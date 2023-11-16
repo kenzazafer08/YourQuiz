@@ -1,12 +1,12 @@
 package com.example.demo.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Where;
+
+import java.util.List;
 
 @Entity
 @Table(name = "Level")
@@ -20,5 +20,8 @@ public class Level {
     private String description;
     private int minScore;
     private int maxScore;
-    protected Boolean deleted;
+    private Boolean deleted;
+    @OneToMany(mappedBy = "level", fetch = FetchType.EAGER)
+    private List<Question> questions;
+
 }

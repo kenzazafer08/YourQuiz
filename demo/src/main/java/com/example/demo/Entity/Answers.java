@@ -21,4 +21,7 @@ public class Answers {
     private String code;
     private String text;
     private boolean deleted;
+
+    @OneToMany(mappedBy = "answer")
+    private List<QuestionAnswers> questionAnswers;
 }
